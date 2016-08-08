@@ -1,0 +1,77 @@
+// Copyright (c) 2009-2014 Christopher M. Eppstein
+// 
+// Permission is hereby granted, free of charge, to any person obtaining
+// a copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to
+// permit persons to whom the Software is furnished to do so, subject to
+// the following conditions:
+// 
+// The above copyright notice and this permission notice shall be
+// included in all copies or substantial portions of the Software.
+// No attribution is required by products that make use of this software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// 
+// Except as contained in this notice, the name(s) of the above copyright
+// holders shall not be used in advertising or otherwise to promote the sale,
+// use or other dealings in this Software without prior written authorization.
+// 
+// Contributors to this project agree to grant all rights to the copyright
+// holder of the primary product. Attribution is maintained in the source
+// control history of the product.
+
+.foo {
+	width: 600px;
+	height: 200px;
+}
+
+.foo .test {
+	/* 16px for margins should be 1em */
+	margin-top: convert-length(16px, em);
+
+	/* 16px for margins should be 2.66667% (relative to parent's width) */
+	margin-right: convert-length(16px, '%', $to-context: 600px);
+
+	/* 1.35em for margins should be 3.6% (relative to parent's width,
+	 * even for top and bottom margins) */
+	margin-bottom: convert-length(1.35em, '%', $to-context: 600px);
+
+	/* 16px for margins should be 2ex */
+	margin-left: convert-length(16px, ex);
+}
+
+.bar {
+	font-size: 18px;
+	width: 360px;
+}
+
+.bar .test {
+	/* 150% for line-height should be 27px */
+	line-height: convert-length(150%, px, 18px);
+
+	/* 1px should always be .0625rem for this page */
+	border-top: convert-length(1px, rem);
+
+	/* 2em for this element should be 9.525mm (relative to own font-size, as inherited) */
+	margin-top: convert-length(2em, mm, 18px);
+
+	/* 2px for margins should be .55556% (relative to parent's width) */
+	margin-right: convert-length(2px, '%', $to-context: 360px);
+
+	/* 1rem should always be 16px for this page, even when own font-size is 18px */
+	margin-bottom: convert-length(1rem, px);
+}
+
+.rem {
+  @include rem(border-width, 10px);
+  @include rem(margin, 10px, false);
+  @include rem(width, auto);
+}

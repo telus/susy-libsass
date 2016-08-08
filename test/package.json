@@ -1,0 +1,20 @@
+{
+  "name": "susy-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "compass-mixins": "^0.12.10",
+    "grunt": "^0.4.5",
+    "grunt-cli": "~1.2.0",
+    "grunt-contrib-compass": "^1.1.1",
+    "grunt-sass": "^1.2.0",
+    "load-grunt-tasks": "^3.5.0",
+    "sass-true": "^2.1.3"
+  }
+}

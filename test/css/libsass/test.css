@@ -1,0 +1,558 @@
+@charset "UTF-8";
+/*
+Test Units
+ */
+.foo {
+  width: 600px;
+  height: 200px;
+}
+
+.foo .test {
+  /* 16px for margins should be 1em */
+  margin-top: 1em;
+  /* 16px for margins should be 2.66667% (relative to parent's width) */
+  margin-right: 2.66667%;
+  /* 1.35em for margins should be 3.6% (relative to parent's width,
+	 * even for top and bottom margins) */
+  margin-bottom: 3.6%;
+  /* 16px for margins should be 2ex */
+  margin-left: 2ex;
+}
+
+.bar {
+  font-size: 18px;
+  width: 360px;
+}
+
+.bar .test {
+  /* 150% for line-height should be 27px */
+  line-height: 27px;
+  /* 1px should always be .0625rem for this page */
+  border-top: 0.0625rem;
+  /* 2em for this element should be 9.525mm (relative to own font-size, as inherited) */
+  margin-top: 9.525mm;
+  /* 2px for margins should be .55556% (relative to parent's width) */
+  margin-right: 0.55556%;
+  /* 1rem should always be 16px for this page, even when own font-size is 18px */
+  margin-bottom: 16px;
+}
+
+.rem {
+  border-width: 10px;
+  border-width: 0.625rem;
+  margin: 0.625rem;
+  width: auto;
+}
+
+/*
+Test Background
+ */
+.background {
+  background-image: -owg-linear-gradient(left, transparent 0, rgba(100, 100, 225, 0.25) 0, rgba(100, 100, 225, 0.25) 6.77966%, transparent 6.77966%, transparent 8.47458%, rgba(100, 100, 225, 0.25) 8.47458%, rgba(100, 100, 225, 0.25) 15.25424%, transparent 15.25424%, transparent 16.94915%, rgba(100, 100, 225, 0.25) 16.94915%, rgba(100, 100, 225, 0.25) 23.72881%, transparent 23.72881%, transparent 25.42373%, rgba(100, 100, 225, 0.25) 25.42373%, rgba(100, 100, 225, 0.25) 32.20339%, transparent 32.20339%, transparent 33.89831%, rgba(100, 100, 225, 0.25) 33.89831%, rgba(100, 100, 225, 0.25) 40.67797%, transparent 40.67797%, transparent 42.37288%, rgba(100, 100, 225, 0.25) 42.37288%, rgba(100, 100, 225, 0.25) 49.15254%, transparent 49.15254%, transparent 50.84746%, rgba(100, 100, 225, 0.25) 50.84746%, rgba(100, 100, 225, 0.25) 57.62712%, transparent 57.62712%, transparent 59.32203%, rgba(100, 100, 225, 0.25) 59.32203%, rgba(100, 100, 225, 0.25) 66.10169%, transparent 66.10169%, transparent 67.79661%, rgba(100, 100, 225, 0.25) 67.79661%, rgba(100, 100, 225, 0.25) 74.57627%, transparent 74.57627%, transparent 76.27119%, rgba(100, 100, 225, 0.25) 76.27119%, rgba(100, 100, 225, 0.25) 83.05085%, transparent 83.05085%, transparent 84.74576%, rgba(100, 100, 225, 0.25) 84.74576%, rgba(100, 100, 225, 0.25) 91.52542%, transparent 91.52542%, transparent 93.22034%, rgba(100, 100, 225, 0.25) 93.22034%, rgba(100, 100, 225, 0.25) 100%, transparent 100%, transparent 100%);
+  background-image: -webkit-linear-gradient(left, transparent 0, rgba(100, 100, 225, 0.25) 0, rgba(100, 100, 225, 0.25) 6.77966%, transparent 6.77966%, transparent 8.47458%, rgba(100, 100, 225, 0.25) 8.47458%, rgba(100, 100, 225, 0.25) 15.25424%, transparent 15.25424%, transparent 16.94915%, rgba(100, 100, 225, 0.25) 16.94915%, rgba(100, 100, 225, 0.25) 23.72881%, transparent 23.72881%, transparent 25.42373%, rgba(100, 100, 225, 0.25) 25.42373%, rgba(100, 100, 225, 0.25) 32.20339%, transparent 32.20339%, transparent 33.89831%, rgba(100, 100, 225, 0.25) 33.89831%, rgba(100, 100, 225, 0.25) 40.67797%, transparent 40.67797%, transparent 42.37288%, rgba(100, 100, 225, 0.25) 42.37288%, rgba(100, 100, 225, 0.25) 49.15254%, transparent 49.15254%, transparent 50.84746%, rgba(100, 100, 225, 0.25) 50.84746%, rgba(100, 100, 225, 0.25) 57.62712%, transparent 57.62712%, transparent 59.32203%, rgba(100, 100, 225, 0.25) 59.32203%, rgba(100, 100, 225, 0.25) 66.10169%, transparent 66.10169%, transparent 67.79661%, rgba(100, 100, 225, 0.25) 67.79661%, rgba(100, 100, 225, 0.25) 74.57627%, transparent 74.57627%, transparent 76.27119%, rgba(100, 100, 225, 0.25) 76.27119%, rgba(100, 100, 225, 0.25) 83.05085%, transparent 83.05085%, transparent 84.74576%, rgba(100, 100, 225, 0.25) 84.74576%, rgba(100, 100, 225, 0.25) 91.52542%, transparent 91.52542%, transparent 93.22034%, rgba(100, 100, 225, 0.25) 93.22034%, rgba(100, 100, 225, 0.25) 100%, transparent 100%, transparent 100%);
+  background-image: -moz-linear-gradient(left, transparent 0, rgba(100, 100, 225, 0.25) 0, rgba(100, 100, 225, 0.25) 6.77966%, transparent 6.77966%, transparent 8.47458%, rgba(100, 100, 225, 0.25) 8.47458%, rgba(100, 100, 225, 0.25) 15.25424%, transparent 15.25424%, transparent 16.94915%, rgba(100, 100, 225, 0.25) 16.94915%, rgba(100, 100, 225, 0.25) 23.72881%, transparent 23.72881%, transparent 25.42373%, rgba(100, 100, 225, 0.25) 25.42373%, rgba(100, 100, 225, 0.25) 32.20339%, transparent 32.20339%, transparent 33.89831%, rgba(100, 100, 225, 0.25) 33.89831%, rgba(100, 100, 225, 0.25) 40.67797%, transparent 40.67797%, transparent 42.37288%, rgba(100, 100, 225, 0.25) 42.37288%, rgba(100, 100, 225, 0.25) 49.15254%, transparent 49.15254%, transparent 50.84746%, rgba(100, 100, 225, 0.25) 50.84746%, rgba(100, 100, 225, 0.25) 57.62712%, transparent 57.62712%, transparent 59.32203%, rgba(100, 100, 225, 0.25) 59.32203%, rgba(100, 100, 225, 0.25) 66.10169%, transparent 66.10169%, transparent 67.79661%, rgba(100, 100, 225, 0.25) 67.79661%, rgba(100, 100, 225, 0.25) 74.57627%, transparent 74.57627%, transparent 76.27119%, rgba(100, 100, 225, 0.25) 76.27119%, rgba(100, 100, 225, 0.25) 83.05085%, transparent 83.05085%, transparent 84.74576%, rgba(100, 100, 225, 0.25) 84.74576%, rgba(100, 100, 225, 0.25) 91.52542%, transparent 91.52542%, transparent 93.22034%, rgba(100, 100, 225, 0.25) 93.22034%, rgba(100, 100, 225, 0.25) 100%, transparent 100%, transparent 100%);
+  background-image: -o-linear-gradient(left, transparent 0, rgba(100, 100, 225, 0.25) 0, rgba(100, 100, 225, 0.25) 6.77966%, transparent 6.77966%, transparent 8.47458%, rgba(100, 100, 225, 0.25) 8.47458%, rgba(100, 100, 225, 0.25) 15.25424%, transparent 15.25424%, transparent 16.94915%, rgba(100, 100, 225, 0.25) 16.94915%, rgba(100, 100, 225, 0.25) 23.72881%, transparent 23.72881%, transparent 25.42373%, rgba(100, 100, 225, 0.25) 25.42373%, rgba(100, 100, 225, 0.25) 32.20339%, transparent 32.20339%, transparent 33.89831%, rgba(100, 100, 225, 0.25) 33.89831%, rgba(100, 100, 225, 0.25) 40.67797%, transparent 40.67797%, transparent 42.37288%, rgba(100, 100, 225, 0.25) 42.37288%, rgba(100, 100, 225, 0.25) 49.15254%, transparent 49.15254%, transparent 50.84746%, rgba(100, 100, 225, 0.25) 50.84746%, rgba(100, 100, 225, 0.25) 57.62712%, transparent 57.62712%, transparent 59.32203%, rgba(100, 100, 225, 0.25) 59.32203%, rgba(100, 100, 225, 0.25) 66.10169%, transparent 66.10169%, transparent 67.79661%, rgba(100, 100, 225, 0.25) 67.79661%, rgba(100, 100, 225, 0.25) 74.57627%, transparent 74.57627%, transparent 76.27119%, rgba(100, 100, 225, 0.25) 76.27119%, rgba(100, 100, 225, 0.25) 83.05085%, transparent 83.05085%, transparent 84.74576%, rgba(100, 100, 225, 0.25) 84.74576%, rgba(100, 100, 225, 0.25) 91.52542%, transparent 91.52542%, transparent 93.22034%, rgba(100, 100, 225, 0.25) 93.22034%, rgba(100, 100, 225, 0.25) 100%, transparent 100%, transparent 100%);
+  background-image: linear-gradient(left, transparent 0, rgba(100, 100, 225, 0.25) 0, rgba(100, 100, 225, 0.25) 6.77966%, transparent 6.77966%, transparent 8.47458%, rgba(100, 100, 225, 0.25) 8.47458%, rgba(100, 100, 225, 0.25) 15.25424%, transparent 15.25424%, transparent 16.94915%, rgba(100, 100, 225, 0.25) 16.94915%, rgba(100, 100, 225, 0.25) 23.72881%, transparent 23.72881%, transparent 25.42373%, rgba(100, 100, 225, 0.25) 25.42373%, rgba(100, 100, 225, 0.25) 32.20339%, transparent 32.20339%, transparent 33.89831%, rgba(100, 100, 225, 0.25) 33.89831%, rgba(100, 100, 225, 0.25) 40.67797%, transparent 40.67797%, transparent 42.37288%, rgba(100, 100, 225, 0.25) 42.37288%, rgba(100, 100, 225, 0.25) 49.15254%, transparent 49.15254%, transparent 50.84746%, rgba(100, 100, 225, 0.25) 50.84746%, rgba(100, 100, 225, 0.25) 57.62712%, transparent 57.62712%, transparent 59.32203%, rgba(100, 100, 225, 0.25) 59.32203%, rgba(100, 100, 225, 0.25) 66.10169%, transparent 66.10169%, transparent 67.79661%, rgba(100, 100, 225, 0.25) 67.79661%, rgba(100, 100, 225, 0.25) 74.57627%, transparent 74.57627%, transparent 76.27119%, rgba(100, 100, 225, 0.25) 76.27119%, rgba(100, 100, 225, 0.25) 83.05085%, transparent 83.05085%, transparent 84.74576%, rgba(100, 100, 225, 0.25) 84.74576%, rgba(100, 100, 225, 0.25) 91.52542%, transparent 91.52542%, transparent 93.22034%, rgba(100, 100, 225, 0.25) 93.22034%, rgba(100, 100, 225, 0.25) 100%, transparent 100%, transparent 100%);
+  background-position: left top;
+  -webkit-background-origin: content;
+  -moz-background-origin: content;
+  -ms-background-origin: content-box;
+  -o-background-origin: content-box;
+  background-origin: content-box;
+  -webkit-background-clip: content-box;
+  -moz-background-clip: content-box;
+  background-clip: content-box;
+}
+
+/*
+Test Bleed
+ */
+.bleed-columns {
+  margin-left: -25.42373%;
+  padding-left: 25.42373%;
+  margin-right: -25.42373%;
+  padding-right: 25.42373%;
+}
+
+.bleed-length {
+  margin-left: -3em;
+  padding-left: 3em;
+  margin-right: -3em;
+  padding-right: 3em;
+}
+
+.bleed-sides {
+  margin-top: -4%;
+  padding-top: 4%;
+  margin-bottom: -4%;
+  padding-bottom: 4%;
+}
+
+/*
+Test Functions
+ */
+/* # Module: susyone functions */
+/* --------------------------- */
+/* Test: container-outer-width */
+/*   ✔ Returns the correct outer width of a default container. */
+/*   ✔ Returns the correct outer width whith specified columns. */
+/*   ✔ Returns correct outer width when columns and outerwidth is specified. */
+/*   ✔ Returns correct outer width when columns and outerwidth is specified. */
+/*  */
+/* Test: get-layout */
+/*   ✔ Returns correct layout based on min width. */
+/*  */
+/* Test: format-nth */
+/*   ✔ Returns correct selector for nth-child. */
+/*   ✔ Returns correct selector for first-child. */
+/*   ✔ Returns correct selector for last-child. */
+/*   ✔ Returns correct selector for only child. */
+/*  */
+/* Test: columns-width */
+/*   ✔ Returns the full width of a grid based on grid settings. */
+/*   ✔ Returns the full width of a grid based on custom param. */
+/*  */
+/* Test: relative-width */
+/*   ✔ Returns width based on percentage of given context. */
+/*  */
+/* Test: columns */
+/*   ✔ Returns proper layout. */
+/*   ✔ Returns proper layout. */
+/*   ✔ Returns proper layout. */
+/*  */
+/* Test: medialayout */
+/*   ✔ Works with three arguments. $min: 30em, $cols: 12, $max: 30em . */
+/*   ✔ Works with one argument for columns. */
+/*   ✔ Works with columns and ie support. */
+/*   ✔ Works with four arguments for min-width, columns, max-width and IE fallback. */
+/*  */
+/* Test: is-default-layout */
+/*   ✔ Returns false if $media-layout overrides the default layout. */
+/*   ✔ Returns true if $media-layout matches default coulms. */
+/*   ✔ Returns true if $media-layout matches default coulms. */
+/*   ✔ Returns false if $media-layout overrides the default layout. */
+/*  */
+/* Test: split-columns-value */
+/*   ✔ Returns just column count when given two arguments. */
+/*   ✔ Returns just column count when given one argument. */
+/*   ✔ Returns column count when spcified. */
+/*   ✔ Returns column position when specified. */
+/*  */
+/* Test: fix-static-misalignment */
+/*   ✔ Confirm default container is set to magic */
+/*   ✔ Confirm custom container-width is accounted for. */
+/*  */
+/* Test: gutter */
+/*   ✔ Return the percentage width of a single gutter in a given 'context'. */
+/*   ✔ Return a fixed width if style is static. */
+/*  */
+/*  */
+/* # SUMMARY ---------- */
+/* 31 Tests: */
+/*  - 31 Passed */
+/*  - 0 Failed */
+/* -------------------- */
+/*
+Test Grid
+ */
+.container {
+  *zoom: 1;
+  max-width: 59em;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.complex-container {
+  *zoom: 1;
+  max-width: 59em;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.complex-container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media (min-width: 69em) {
+  .complex-container {
+    *zoom: 1;
+    max-width: 69em;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .complex-container:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+.inner-default-container {
+  *zoom: 1;
+  max-width: 59em;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 30em) {
+  .inner-default-container {
+    *zoom: 1;
+    max-width: 19em;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .inner-default-container:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+.inner-default-container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media (min-width: 69em) {
+  .inner-default-container {
+    *zoom: 1;
+    max-width: 69em;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .inner-default-container:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+.span-columns {
+  width: 49.15254%;
+  float: right;
+  margin-right: 0;
+}
+
+.span-columns-with-padding {
+  padding-left: 1.69492%;
+  padding-right: 3.38983%;
+  width: 44.0678%;
+  float: right;
+  margin-right: 0;
+}
+
+.reset-columns {
+  float: none;
+  width: auto;
+  margin-right: auto;
+}
+
+.omega {
+  float: right;
+  margin-right: 0;
+}
+
+.nth-omega:last-child {
+  float: right;
+  margin-right: 0;
+}
+
+.remove-omega {
+  float: left;
+  margin-right: 1.69492%;
+}
+
+.remove-nth-omega:last-child {
+  float: left;
+  margin-right: 1.69492%;
+}
+
+/* ---------------------------------------------------------------------------
+/* Border-Box Sizing */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.container {
+  *zoom: 1;
+  max-width: 61em;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.span-columns-with-padding {
+  padding-left: 1.69492%;
+  padding-right: 3.38983%;
+  width: 49.15254%;
+  float: right;
+  margin-right: 0;
+}
+
+/* ---------------------------------------------------------------------------
+/* Static output */
+.static {
+  width: 9em;
+  float: left;
+  margin-right: 1em;
+}
+
+.force-fluid {
+  width: 15.25424%;
+  float: left;
+  margin-right: 1.69492%;
+  margin-left: 8.47458%;
+  margin-right: 8.47458%;
+}
+
+/* ---------------------------------------------------------------------------
+/* Pixel-Values only */
+.container {
+  *zoom: 1;
+  width: 944px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/*
+Test Isolation
+ */
+.isolate {
+  margin-right: -100%;
+  margin-left: 16.94915%;
+}
+
+.isolate-grid {
+  width: 24.05063%;
+  float: left;
+  margin-right: 1.26582%;
+  margin-right: -100%;
+}
+
+.isolate-grid:nth-child(4n + 1) {
+  margin-left: 0%;
+  clear: left;
+}
+
+.isolate-grid:nth-child(4n + 2) {
+  margin-left: 25.31646%;
+  clear: none;
+}
+
+.isolate-grid:nth-child(4n + 3) {
+  margin-left: 50.63291%;
+  clear: none;
+}
+
+.isolate-grid:nth-child(4n + 4) {
+  margin-left: 75.94937%;
+  clear: none;
+}
+
+.isolate-grid-for-nth-of-type {
+  width: 24.05063%;
+  float: left;
+  margin-right: 1.26582%;
+  margin-right: -100%;
+}
+
+.isolate-grid-for-nth-of-type:nth-of-type(4n + 1) {
+  margin-left: 0%;
+  clear: left;
+}
+
+.isolate-grid-for-nth-of-type:nth-of-type(4n + 2) {
+  margin-left: 25.31646%;
+  clear: none;
+}
+
+.isolate-grid-for-nth-of-type:nth-of-type(4n + 3) {
+  margin-left: 50.63291%;
+  clear: none;
+}
+
+.isolate-grid-for-nth-of-type:nth-of-type(4n + 4) {
+  margin-left: 75.94937%;
+  clear: none;
+}
+
+/*
+Test Margin
+ */
+.pre {
+  margin-left: 25.42373%;
+}
+
+.post {
+  margin-right: 33.89831%;
+}
+
+.push {
+  margin-left: 25.42373%;
+}
+
+.pull {
+  margin-left: -33.89831%;
+}
+
+.squish {
+  margin-left: 12.82051%;
+  margin-right: 25.64103%;
+}
+
+/*
+Test Media
+ */
+.layout {
+  *zoom: 1;
+  max-width: 19em;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.layout:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media (min-width: 29em) {
+  .breakpoint .break6 {
+    *zoom: 1;
+    max-width: 29em;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .breakpoint .break6:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .breakpoint .nth-omega:nth-child(3n) {
+    float: right;
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 30em) and (max-width: 60em) {
+  .breakpoint .break60-8-30 {
+    max-width: 39em;
+  }
+}
+
+@media (min-width: 119em) {
+  .breakpoint .break-ltie9 {
+    max-width: 119em;
+    *zoom: 1;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+  }
+}
+
+.with-settings6-3-2-1 {
+  *zoom: 1;
+  max-width: 28em;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.with-settings6-3-2-1:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.with-settings6-3r-2r-1r {
+  *zoom: 1;
+  max-width: 504px;
+  max-width: 28rem;
+  padding-left: 18px;
+  padding-left: 1rem;
+  padding-right: 18px;
+  padding-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.with-settings6-3r-2r-1r:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media (min-width: 33.75em) and (max-width: 67.5em) {
+  .break60r-8-30r {
+    max-width: 684px;
+    max-width: 38rem;
+  }
+}
+
+@media (min-width: 33.75em) and (max-width: 67.5em) {
+  .break60-8-30 {
+    max-width: 684px;
+    max-width: 38rem;
+  }
+}
+
+/*
+Test Background
+ */
+.prefix {
+  padding-left: 16.94915%;
+}
+
+.suffix {
+  padding-right: 22.72727%;
+}
+
+.pad {
+  padding-left: 20.40816%;
+  padding-right: 40.81633%;
+}
