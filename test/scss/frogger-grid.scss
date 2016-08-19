@@ -1,0 +1,92 @@
+@import "susy";
+
+//---------- SETTINGS ---------
+
+// container min and max widths
+$min-container-width: 320px;
+$max-container-width: 1200px;
+
+// "phone" grid settings
+$phone-total-columns: 4;
+$phone-column-width: 64px;
+$phone-gutter-width: 20px;
+$phone-breakpoint-max: 767px;
+$phone-grid-padding: $phone-gutter-width;
+
+// "tablet" grid settings
+$tablet-breakpoint-min: 768px;
+$tablet-breakpoint-max: 1099px;
+$tablet-total-columns: 6;
+$tablet-column-width: 105px;
+$tablet-gutter-width: 20px;
+$tablet-grid-padding: $tablet-gutter-width;
+
+// "desktop" grid settings
+$desktop-breakpoint-min: 1100px; // was formerly: $max-container-width;
+// $desktop-breakpoint-max: 1920px;
+$desktop-total-columns: 12;
+$desktop-column-width: 64px;
+$desktop-gutter-width: 30px;
+$desktop-grid-padding: $desktop-gutter-width;
+
+// Susy-specific
+@include border-box-sizing;
+$container-style: fluid;
+
+$total-columns: $phone-total-columns;
+$column-width: $phone-column-width;
+$gutter-width: $phone-gutter-width;
+$grid-padding: $phone-grid-padding;
+
+$debugging-grid: false;
+
+//---------- MIX-INS ---------
+
+
+@mixin grid() {
+  @include container;
+
+  @if $debugging-grid {
+    @include susy-grid-background;
+  }
+
+  min-width: $min-container-width;
+  max-width: $max-container-width;
+
+  // tablet breakpoint
+  @include at-breakpoint( $tablet-breakpoint-min $tablet-total-columns $tablet-breakpoint-max ) {
+    //@include with-grid-settings( $tablet-total-columns, $tablet-column-width, $tablet-gutter-width, $tablet-grid-padding ) {
+    //  @include set-container-width;
+    //  @if $debugging-grid {
+    //    @include susy-grid-background;
+    //  }
+    //}
+  }
+
+  // desktop breakpoint
+  // @include at-breakpoint( $desktop-breakpoint-min $desktop-total-columns ) {
+  //   @include with-grid-settings( $desktop-total-columns, $desktop-column-width, $desktop-gutter-width, $desktop-grid-padding ) {
+  //     @include set-container-width;
+  //     @if $debugging-grid {
+  //       @include susy-grid-background;
+  //     }
+  //   }
+  // }
+}
+
+
+// Nested
+@include at-breakpoint($tablet-breakpoint-min $tablet-total-columns) {
+
+  .grid {
+    @include grid();
+  }
+  
+  /* this should render */
+  .content {
+    font-weight: bold;
+  }
+  
+}
+
+

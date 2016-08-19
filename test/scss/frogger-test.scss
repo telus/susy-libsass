@@ -1,0 +1,861 @@
+@import "susy";
+
+//---------- GLOBAL VARIABLES ---------
+
+//--- WHITE ---
+$white-ff: #fff;
+$white-f9: #f9fafa;
+$white-f5: #f5f6f7;
+$white-eb: #ebedef;
+$white: $white-ff; // default
+
+//--- BLACK ---
+$black-33: #333;
+$black-25: #252525;
+$black-00: #000;
+$black: $black-33; // default
+
+//--- GRAYS ---
+$gray-f3: #f3f3f3;
+$gray-ec: #ececec;
+$gray-e2: #e2e2e2;
+$gray-cc: #ccc;
+$gray-ce: #cecece;
+$gray-a9: #a9a9a9;
+$gray-90: #909090;
+$gray-58: #595859;
+$gray-66: #666;
+$gray-3d: #3d3c3c;
+$gray: $gray-58; // default
+
+//--- PURPLE ---
+$purple-f9: #f9f1ff;
+$purple-ec: #ece7ee;
+$purple-e7: #e7e1e9;
+$purple-e0: #e0cdf4;
+$purple-c8: #c8bbd0;
+$purple-b1: #b196c1;
+$purple-83: #8350a7;
+$purple-8c: #8c68a6;
+$purple-49: #49166d;
+$purple: $purple-49; // default
+
+//--- GREENS ---
+$green-b2: #b2d47e;
+$green-8b: #8be234;
+$green-66: #66cc00;
+$green-58: #58a809;
+$green-57: #57a708;
+$green-40: #408000;
+$green-4c: #4c9702;
+$green-38: #386f00;
+$green: $green-66; // default
+
+//--- RED ---
+$red-bd: #bd0000;
+$red-c8: #c81235;
+$red-d9: #d90030;
+$red-f4: #f42343;
+$red-fd: #fde9ed;
+$red-f8: #f8dde3;
+$red: $red-f4; //default
+
+$orange-f2: #f26522;
+$orange: $orange-f2;
+
+
+//---------- GRID DEBUGGING ---------
+
+$debugging-grid: false; // set to true or false
+
+//---------- SETTINGS ---------
+
+// container min and max widths
+$min-container-width: 320px;
+$max-container-width: 1200px;
+
+// "phone" grid settings
+$phone-total-columns: 4;
+$phone-column-width: 64px;
+$phone-gutter-width: 20px;
+$phone-breakpoint-max: 767px;
+$phone-grid-padding: $phone-gutter-width;
+
+// "tablet" grid settings
+$tablet-breakpoint-min: 768px;
+$tablet-breakpoint-max: 1099px;
+$tablet-total-columns: 6;
+$tablet-column-width: 105px;
+$tablet-gutter-width: 20px;
+$tablet-grid-padding: $tablet-gutter-width;
+
+// "desktop" grid settings
+$desktop-breakpoint-min: 1100px; // was formerly: $max-container-width;
+// $desktop-breakpoint-max: 1920px;
+$desktop-total-columns: 12;
+$desktop-column-width: 64px;
+$desktop-gutter-width: 30px;
+$desktop-grid-padding: $desktop-gutter-width;
+
+// Susy-specific
+@include border-box-sizing;
+$container-style: fluid;
+
+$total-columns: $phone-total-columns;
+$column-width: $phone-column-width;
+$gutter-width: $phone-gutter-width;
+$grid-padding: $phone-grid-padding;
+
+//---------- MIX-INS ---------
+
+// BLEED MIX-IN
+/*  This variant of a mixin from Eric Meyer for bleed.
+    Note that the bleed is only _within_ the Susy grid
+    (to fill in grid-padding) so if you want a background color
+    to have a real full bleed (meaning edge to edge in the browser),
+    put the background color on a container and then include an
+    element that has a Susy grid container applied to it.
+    Example HTML:
+      <section>
+        <div class="grid-one-column">
+          <div class"has-bleed">
+          </div>
+        </div>
+      </section>
+    Example SASS:
+      section {
+        background-color: black;
+      }
+      .grid-one-column {
+        @include container;
+      }
+      .has-bleed {
+        @include bleed;
+      }
+*/
+
+@mixin bleed($padding: $grid-padding, $sides: left right) {
+  @if $sides == 'all' {
+    margin: - $padding;
+  } @else {
+    @each $side in $sides {
+      margin-#{$side}: - $padding;
+    }
+  }
+}
+
+// this is untested! Please experiment.
+@mixin remove-bleed($padding: $grid-padding, $sides: left right) {
+  @if $sides == 'all' {
+    margin: 0;
+  } @else {
+    @each $side in $sides {
+      margin-#{$side}: 0;
+    }
+  }
+}
+
+@mixin grid() {
+  @include container;
+
+  @if $debugging-grid {
+    @include susy-grid-background;
+  }
+
+  min-width: $min-container-width;
+  max-width: $max-container-width;
+
+  // tablet breakpoint
+  @include at-breakpoint( $tablet-breakpoint-min $tablet-total-columns $tablet-breakpoint-max ) {
+    @include with-grid-settings( $tablet-total-columns, $tablet-column-width, $tablet-gutter-width, $tablet-grid-padding ) {
+      @include set-container-width;
+      @if $debugging-grid {
+        @include susy-grid-background;
+      }
+    }
+  }
+
+  // desktop breakpoint
+  @include at-breakpoint( $desktop-breakpoint-min $desktop-total-columns ) {
+    @include with-grid-settings( $desktop-total-columns, $desktop-column-width, $desktop-gutter-width, $desktop-grid-padding ) {
+      @include set-container-width;
+      @if $debugging-grid {
+        @include susy-grid-background;
+      }
+    }
+  }
+}
+
+//---------- STYLES ---------
+
+.bleed {
+  @include bleed();
+}
+
+.grid-one-column {
+
+  @include container;
+  min-width: $min-container-width;
+  max-width: $max-container-width;
+
+  // set to phone settings
+  @include with-grid-settings( 1, $column-width, $gutter-width, $grid-padding) {
+    @include set-container-width;
+    @if $debugging-grid {
+      @include susy-grid-background;
+    }
+  }
+
+  // tablet breakpoint
+  @include at-breakpoint( $tablet-breakpoint-min $tablet-total-columns $tablet-breakpoint-max ) {
+    @include with-grid-settings( 1, $tablet-column-width, $tablet-gutter-width, $tablet-grid-padding ) {
+      @include set-container-width;
+      @if $debugging-grid {
+        @include susy-grid-background;
+      }
+    }
+  }
+
+  // desktop breakpoint
+  @include at-breakpoint( $desktop-breakpoint-min $desktop-total-columns ) {
+    @include with-grid-settings( 1, $desktop-column-width, $desktop-gutter-width, $desktop-grid-padding ) {
+      @include set-container-width;
+      @if $debugging-grid {
+        @include susy-grid-background;
+      }
+    }
+  }
+
+}
+
+.grid {
+
+  // set to phone settings
+  @include container;
+  @if $debugging-grid {
+    @include susy-grid-background;
+  }
+
+  min-width: $min-container-width;
+  max-width: $max-container-width;
+
+  // tablet breakpoint
+  @include at-breakpoint( $tablet-breakpoint-min $tablet-total-columns $tablet-breakpoint-max ) {
+    @include with-grid-settings( $tablet-total-columns, $tablet-column-width, $tablet-gutter-width, $tablet-grid-padding ) {
+      @include set-container-width;
+      @if $debugging-grid {
+        @include susy-grid-background;
+      }
+    }
+  }
+
+  // desktop breakpoint
+  @include at-breakpoint( $desktop-breakpoint-min $desktop-total-columns ) {
+    @include with-grid-settings( $desktop-total-columns, $desktop-column-width, $desktop-gutter-width, $desktop-grid-padding ) {
+      @include set-container-width;
+      @if $debugging-grid {
+        @include susy-grid-background;
+      }
+    }
+  }
+} // end .grid
+
+
+
+.meganav {
+  background: white;
+}
+
+.meganav-l1 {
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .frg-icon {
+    color: $gray-66;
+    font-size: 28px;
+    padding-right: 5px;
+    display: inline-block;
+  }
+  .icon-plus {
+    font-size: 14px;
+    color: $green;
+    float: right;
+    padding-top: 3px;
+  }
+}
+
+.meganav-toggle.expanded {
+  .icon-plus:before {
+    content: "\E115";
+  }
+}
+
+.meganav-hamburger {
+  font-size: 30px;
+  padding-bottom: 15px;
+  text-decoration: none;
+  width: 34px;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.meganav-footer {
+  background: $gray-3d;
+  min-height: 10px;
+  li a {
+    color: #cecece;
+    font-size: 14px;
+  }
+  img {
+    max-width: 55px;
+  }
+}
+
+.meganav-footer-bottom {
+  position: relative;
+  img {
+    position: absolute;
+  }
+  li a {
+    display: inline-block;
+    padding: 12px 5px 12px 15px;
+    border-bottom: 0;
+  }
+}
+
+.meganav-bullets {
+  font-size: 14px;
+  list-style: disc inside;
+  float: left;
+  color: $gray-66;
+  padding-top: $grid-padding * 0.5;
+  li {
+    padding-left: 0;
+  }
+}
+
+// mobile only
+@include at-breakpoint( 0 $phone-total-columns $phone-breakpoint-max ) {
+
+  .meganav {
+    display: block;
+    clear: both;
+  }
+
+  .meganav-hamburger {
+    display: block;
+  }
+
+  .meganav-l1 {
+    @include bleed();
+    background: $white-f5;
+    border-top: 1px solid $gray-e2;
+    a {
+      display: block;
+      padding: 12px 15px;
+      border-bottom: 1px solid $gray-e2;
+      font-size: 19px;
+    }
+  }
+
+  .meganav-l2 {
+    display: inherit !important;
+    .icon-plus {
+      padding-top: 8px;
+    }
+
+  }
+
+  .meganav-l3 {
+    a {
+      font-size: 15px;
+      border: 0;
+      padding: 10px 10px 10px 60px;
+    }
+  }
+
+  .meganav-l3.content-expanded li
+  {
+    border-bottom: 1px solid $gray-e2;
+  }
+
+  .meganav-footer-top {
+    font-size: 0;
+    li {
+      // display: inline-block;
+      // width: 33.333%;
+      // border-right: 1px solid $gray-e2;
+      // text-align: center;
+      vertical-align: baseline;
+      a {
+        vertical-align: middle;
+        display: inline-block;
+        width: 100%;
+        padding-left: 40px;
+      }
+      &:last-child {
+        border-right: 0;
+      }
+    }
+  }
+
+  .french .meganav-footer-top li a {
+    min-height: 3.5em;
+  }
+
+  .meganav-footer-bottom {
+    clear: both;
+    img {
+      max-width: 31px;
+    }
+  }
+
+  .meganav-desktop-about {
+    display: none;
+  }
+
+  .js {
+
+    .meganav-l1,
+    .meganav-l2,
+    .meganav-l3 {
+      display: none;
+    }
+
+    .meganav-l2.meganav-shop {
+      display: block;
+    }
+
+    .meganav-shoplink > .meganav-toggle {
+      display: none;
+    }
+
+    .meganav-accountlink .meganav-l2 {
+      display: block;
+    }
+
+  }
+
+}
+
+// tablet and larger
+@include at-breakpoint( $tablet-breakpoint-min $tablet-total-columns ) {
+
+  .meganav {
+    float: left;
+  }
+
+  .meganav-l1 {
+    display: block !important;
+    & > li {
+      float: left;
+    }
+  }
+
+  .meganav-l1-link {
+    margin-top: -15px;
+    padding: 29px 10px 25px 15px;
+    display: block;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    position: relative;
+    z-index: 26;
+    &.expanded {
+      background: $white-f5;
+      border-color: $gray-e2;
+      padding-bottom: 26px;
+      margin-bottom: -1px;
+    }
+  }
+
+  .meganav-l2 {
+    left: 0;
+    background: $white-f5;
+    border-top: 1px solid $gray-e2;
+    border-bottom: 1px solid $gray-e2;
+    width: 100%;
+    a {
+      font-size: 15px;
+    }
+  }
+
+  .js {
+    .meganav-l2 {
+      display: none;
+      position: absolute;
+      z-index: 1;
+      &.content-expanded {
+        z-index: 25;
+      }
+    }
+  }
+
+  .meganav-l2-inner {
+    @include grid();
+    margin-top: 20px;
+    margin-bottom: 20px;
+    & > li {
+      border-left: 1px solid $gray-e2;
+    }
+  }
+
+  .meganav-shoplink .meganav-l2-inner > li {
+    min-height: 215px;
+  }
+
+  .meganav-west .meganav-shoplink .meganav-l2-inner > li  {
+    min-height: 300px;
+  }
+
+  .meganav-l2-link{
+
+    & > .frg-icon {
+    margin-right: 10px;
+    margin-bottom: 30px;
+    }
+
+    .meganav-account-title{
+      display: inline-block;
+      margin-bottom: 5px;
+      padding-top: 2px;
+    }
+  }
+
+  .meganav-l3 {
+    display: block !important;
+  }
+
+  .meganav-copy {
+    .frg-icon {
+      font-size: 14px;
+      color: $purple;
+    }
+    img {
+      display: block;
+    }
+    a {
+      white-space: nowrap;
+      display: block;
+      margin-top: 15px;
+    }
+  }
+
+  .meganav-shop,
+  .meganav-account {
+    @include pie-clearfix();
+    li {
+      padding-left: 20px;
+    }
+  }
+
+  .meganav-l2-section {
+    & > a {
+      font-size: 20px;
+      white-space: nowrap;
+    }
+    &:first-child {
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+
+  .meganav-l3,
+  .meganav-copy {
+    padding-top: 10px;
+    padding-left: 40px;
+  }
+
+  .meganav-l3 {
+    @include pie-clearfix();
+    li {
+      padding-left: 0;
+    }
+    a {
+      display: inline-block;
+      padding: 5px 0;
+    }
+  }
+
+
+  .meganav-east {
+    .meganav-l3-sub {
+      float: left;
+      width: 50%;
+    }
+    .meganav-shop-wireless {
+      width: 41%;
+    }
+    .meganav-shop-deals {
+      width: 27%;
+    }
+  }
+
+  .meganav-west {
+    .meganav-l3-sub:first-child {
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid $gray-e2;
+    }
+    .meganav-shop-tv {
+      width: 25%;
+    }
+    .meganav-shop-wireless {
+      width: 22%;
+      padding-right: 20px;
+    }
+    .meganav-shop-deals {
+      width: 27%;
+    }
+  }
+
+  .meganav-qc {
+    .meganav-copy {
+      margin-bottom: 20px;
+      margin-right: 20px;
+      img {
+        padding-top: 15px;
+      }
+    }
+    .meganav-l2-section > a {
+      font-size: 18px;
+    }
+  }
+
+  .meganav-shop-westcoast {
+    float: left;
+    width: 26%;
+  }
+
+  .meganav-shop-internet,
+  .meganav-shop-optiktv {
+     padding-right: 20px;
+  }
+
+  .meganav-qc .meganav-copy-mobileinternet,
+  .meganav-shop-internet .meganav-l3,
+  .meganav-shop-optiktv .meganav-l3 {
+    padding-bottom: 20px;
+    border-bottom: 1px solid $gray-e2;
+  }
+
+  .meganav-shop-homephone,
+  .meganav-shop-satellite {
+    padding-top: 20px;
+  }
+
+  .meganav-shop-wireless {
+    border-left: 0;
+    float: left;
+  }
+
+  .meganav-shop-mobileinternet {
+    float: left;
+    width: 32%;
+  }
+
+  .meganav-shop-tv {
+    float: left;
+    width: 25%;
+  }
+
+  .meganav-shop-deals {
+    float: left;
+    p,
+    img {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    p {
+      line-height: 21px;
+      margin-bottom: 14px;
+    }
+  }
+
+  .meganav-account-mobility,
+  .meganav-account-hs {
+    float: left;
+    width: 50%;
+    .frg-icon {
+      font-size: 28px;
+      padding-right: 0;
+      display: block;
+      float: left;
+    }
+  }
+
+  .meganav-account-intro {
+    font-size: 14px;
+    line-height: 1.3;
+    padding-right: 20px;
+    border-left: 0;
+  }
+
+  .meganav-account-title {
+    display: block;
+    padding-top: 10px;
+    float: none;
+    clear: both;
+  }
+
+  .meganav-footer {
+    box-shadow: 0 2px 2px 0px rgba(102, 102, 102, 0.7);
+  }
+
+  .meganav-footer-bottom {
+    @include grid();
+    img {
+      right: -55px;
+      top: -11px;
+    }
+    li {
+      position: relative;
+      display: inline-block;
+      &:first-child {
+        //padding-right: 20px;
+      }
+      &:last-child {
+        padding-left: 43px;
+      }
+    }
+    a {
+      display: block;
+      padding: 10px;
+    }
+
+    .frg-icon{
+      font-size: 14px;
+      color: #cecece;
+      margin-left: 5px;
+    }
+  }
+
+  #meganav-l2-account .meganav-footer-bottom {
+    padding-left: 0;
+  }
+
+}
+
+
+// desktop
+@include at-breakpoint( $desktop-breakpoint-min $desktop-total-columns ) {
+
+  .meganav-l1-link {
+    padding: 29px 30px 25px 30px;
+  }
+
+
+}
+
+
+
+// from beta.telus.com/apache/source/sass/sandboxes/global/common.scss
+// header updater to mobile navigation
+
+.telus-logo {
+  @media screen and (max-width: 767px) {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+.site-header {
+  padding-bottom: 0px;
+}
+
+.icon-holder .icon-map-marker {
+  display: none;
+  visibility: hidden;
+}
+
+.icon-magnify-glass {
+  font-size: 22px;
+}
+
+.telus-logo-mobile {
+  display: block;
+  position: absolute;
+  top: 51px;
+  left: 50px;
+  float: none;
+  height: auto;
+  margin-left: 15px;
+
+  @media screen and (min-width: 1100px) {
+    display: none;
+    visibility: hidden;
+  }
+
+  @media screen and (min-width: 767px) and (max-width: 1099px) {
+    display: none;
+    visibility: hidden;
+  }
+
+  & img {
+    width: 120px;
+    max-height: 100%;
+    // margin-top: 6px;
+  }
+}
+
+.meganav {
+  margin-top: 15px;
+  padding-top: 0;
+
+  @media screen and (max-width: 767px) {
+    display: block;
+    position: relative;
+  }
+
+  @media screen and (min-width: 768px) {
+    margin-top: 0;
+  }
+
+}
+
+.meganav-hamburger {
+  padding-bottom: 20px;
+  font-size: 20px;
+  // float: left;
+}
+
+a.meganav-l1-link {
+  border-top: 1px solid transparent;
+  @media screen and (min-width: 768px) {
+    &:hover, &:focus {
+      color: #8c68a6;
+    }
+  }
+}
+
+li.meganav-l2-section a {
+  @media screen and (min-width: 768px) {
+    &:hover, &:focus {
+      color: #8c68a6;
+    }
+  }
+}
+
+.meganav-shop-wireless.meganav-l2-section {
+    padding-left: 0;
+    border-left: 0;
+}
+
+div.header-icons {
+  @media screen and (max-width: 767px) {
+    top: 38px;
+  }
+}
+
+header .header-icons span.region-language-text {
+  color: #49166d;
+  border-bottom: 1px dotted #49166d;
+  padding-left: 0;
+  > abbr {
+    text-decoration: none;
+  }
+}
+
