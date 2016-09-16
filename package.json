@@ -1,0 +1,9 @@
+{
+  "name": "susy libsass",
+  "version": "1.0.0",
+  "description": "susy libsass",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/telusdigital/susy-libsass.git"
+  }
+}
